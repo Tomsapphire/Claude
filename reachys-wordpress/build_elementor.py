@@ -200,6 +200,15 @@ body{{overflow-x:hidden;background:{IVORY}}}
 .rx-form input:focus,.rx-form select:focus,.rx-form textarea:focus{{outline:none;border-color:{INK};box-shadow:0 0 0 4px rgba(22,20,15,.08)}}
 .rx-form button{{height:60px;border:0;border-radius:999px;background:{INK};color:{IVORY};font:inherit;font-size:17px;font-weight:600;cursor:pointer;transition:transform .25s}}
 .rx-form button:hover{{transform:translateY(-2px)}}
+.rx-form button:disabled{{opacity:.6;cursor:wait;transform:none}}
+.rx-hp{{position:absolute !important;left:-9999px !important;width:1px;height:1px;overflow:hidden}}
+.rx-status{{margin:0;color:#B42318;font-size:15px;font-weight:500}}
+.rx-status:empty{{display:none}}
+.rx-thanks{{display:flex;flex-direction:column;align-items:flex-start;gap:16px;background:#F9F7F2;border:1.5px solid #CFC8B8;border-radius:24px;padding:48px;font-family:'{SANS}',sans-serif;animation:rxrise .6s ease-out both}}
+.rx-thanks[hidden]{{display:none}}
+.rx-thanks .rx-check{{width:72px;height:72px;border-radius:50%;background:{ACCENT};color:{INK};display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:700}}
+.rx-thanks h3{{margin:0;font-family:'{DISPLAY}',serif;font-weight:800;font-size:40px;letter-spacing:-1px;color:{INK}}}
+.rx-thanks p{{margin:0;font-size:17px;line-height:1.55;color:{BODY}}}
 @media (max-width:1024px){{.rx-hide-tablet-deco{{display:none}}}}
 @media (max-width:767px){{
 .rx-form .rx-two{{grid-template-columns:1fr}}
@@ -500,8 +509,10 @@ content.append(section({"_title": "Results", "_element_id": "results",
                        [results_left, quote_card]))
 
 # CONTACT -------------------------------------------------------------------
-FORM_HTML = """<!-- Replace this form with your form plugin (Elementor Pro Form, WPForms, Contact Form 7…) or set action="" to your endpoint. -->
-<form class="rx-form" action="#" method="post" aria-label="Project enquiry">
+FORM_HTML = """<!-- reachys contact form. Submissions are saved by the "reachys Enquiries" plugin (WP admin → Enquiries). -->
+<form id="rx-enquiry" class="rx-form" action="/wp-admin/admin-post.php" method="post" aria-label="Project enquiry">
+<input type="hidden" name="action" value="reachys_enquiry">
+<div class="rx-hp" aria-hidden="true"><label for="rx-website">Website</label><input id="rx-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 <div class="rx-two">
 <div><label for="rx-name">Name</label><input id="rx-name" name="name" type="text" placeholder="Your name" required></div>
 <div><label for="rx-email">Email</label><input id="rx-email" name="email" type="email" placeholder="you@company.com" required></div>
@@ -511,8 +522,47 @@ FORM_HTML = """<!-- Replace this form with your form plugin (Elementor Pro Form,
 <option>Full-service marketing</option><option>Strategy</option><option>Brand &amp; identity</option><option>Content &amp; social</option><option>Performance &amp; SEO</option>
 </select></div>
 <div><label for="rx-msg">Tell us about your project</label><textarea id="rx-msg" name="message" rows="5" placeholder="Goals, timeline, budget range…"></textarea></div>
+<p class="rx-status" role="alert"></p>
 <button type="submit">Send enquiry →</button>
-</form>"""
+</form>
+<div class="rx-thanks" role="status" hidden>
+<div class="rx-check" aria-hidden="true">✓</div>
+<h3>Thanks — we're on it.</h3>
+<p>We'll be in touch within one business day.</p>
+</div>
+<script>
+(function () {
+  var form = document.getElementById('rx-enquiry');
+  if (!form || form.dataset.rxBound) return;
+  form.dataset.rxBound = '1';
+  var thanks = form.parentNode.querySelector('.rx-thanks');
+  var status = form.querySelector('.rx-status');
+  var btn = form.querySelector('button[type=submit]');
+  var label = btn.textContent;
+  function done() { form.hidden = true; thanks.hidden = false; }
+  if (/[?&]enquiry=sent/.test(location.search)) done();
+  if (/[?&]enquiry=error/.test(location.search)) status.textContent = 'Please add your name and a valid email address.';
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    status.textContent = '';
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    var data = new FormData(form);
+    data.append('ajax', '1');
+    fetch(form.action, { method: 'POST', body: data, credentials: 'same-origin' })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res && res.success) { done(); return; }
+        throw new Error(res && res.data && res.data.message);
+      })
+      .catch(function (err) {
+        status.textContent = (err && err.message) || 'Sorry, something went wrong. Please email us instead.';
+        btn.disabled = false;
+        btn.textContent = label;
+      });
+  });
+})();
+</script>"""
 
 contact_items = [
     {"_id": eid(), "text": "hello@reachys.com", "selected_icon": {"value": "far fa-envelope", "library": "fa-regular"},
@@ -544,7 +594,7 @@ contact_panel = container({
                              "icon_color": INK, "text_color": INK, "icon_size": px(20), "text_indent": px(12),
                              **typo("icon_typography", SANS, 17, "500", 1.4)}),
     ]),
-    html(FORM_HTML, {"_title": "Contact form (replace with your form plugin)"}),
+    html(FORM_HTML, {"_title": "Contact form"}),
 ])
 anim(contact_panel["settings"], 0, widget=False)
 content.append(container({"_title": "Contact", "_element_id": "contact", "flex_direction": "column",

@@ -62,8 +62,29 @@ The page adapts to tablet and mobile widths. All of these values can be adjusted
 
 ## Things to update
 
-- **Contact form:** the form is an HTML widget and doesn't send anything yet. Replace it with the Elementor Pro **Form** widget, or with a WPForms or Contact Form 7 shortcode.
+- **Contact form:** see *Contact form submissions* below.
 - **Contact details:** the email (`hello@reachys.com`) and `[City, Country]` are placeholders.
 - **Social links:** in the footer, they point to `#`.
 - **Results and testimonial:** the figures and the Maya Okafor testimonial are sample content. Replace them with real results and a real client quote, used with the client's permission, before launch.
 - **Accent colour:** it is set on each element, and also in the CSS widget at the top (`#FF6B3D`). To change it everywhere, edit `build_elementor.py` (`ACCENT = …`), run `python3 build_elementor.py` and import the new JSON.
+
+## Contact form submissions
+
+The form on the page is connected to a small plugin, **reachys Enquiries**. It saves each message inside WordPress and emails you about it. The form keeps its design.
+
+1. **Plugins → Add New → Upload Plugin**, choose `reachys-enquiries.zip`, then **Install Now** and **Activate**.
+2. **Only if you imported the template before this update:** paste in the new form and style code.
+   - Edit the page with Elementor and open the **Navigator**.
+   - Click the **Contact form** HTML widget (under Contact → Contact panel) and replace its code with the contents of `contact-form-widget.html`.
+   - Click the **Global CSS** HTML widget (at the very top) and replace its code with `global-styles-widget.html`.
+   - Click **Update**.
+3. Send a test message from the live page.
+
+Where messages go:
+
+- **Admin:** each one appears under **Enquiries** in the WordPress admin menu, with name, email, company, service, message and date.
+- **Email:** each one is also emailed to the address in **Settings → General → Administration Email Address**. If the emails don't arrive, install **WP Mail SMTP**; many hosts block WordPress's default email sending.
+
+Spam protection: the form has a hidden trap field and allows at most 5 messages per visitor every 10 minutes.
+
+If WordPress is installed in a subfolder (e.g. `example.com/wp/`), change `action="/wp-admin/admin-post.php"` in the form code to `action="/wp/wp-admin/admin-post.php"`.
