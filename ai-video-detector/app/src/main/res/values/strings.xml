@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AI Video Detector</string>
+    <string name="intro">Detects AI-generated videos while you scroll TikTok, Instagram and other feeds. Everything runs on your phone; no video leaves the device.</string>
+    <string name="step_usage">1. Allow usage access (to know when a social app is open)</string>
+    <string name="step_overlay">2. Allow display over other apps (for the result badge)</string>
+    <string name="start">Start detection</string>
+    <string name="stop">Stop detection</string>
+    <string name="granted">✓ Granted</string>
+    <string name="grant">Grant</string>
+    <string name="notif_channel">Detection status</string>
+    <string name="notif_title">AI video detection is on</string>
+    <string name="notif_text">Analyzes only while a social video app is open</string>
+    <string name="no_model">No detection model installed</string>
+    <string name="missing_permissions">Grant both permissions first</string>
+</resources>
