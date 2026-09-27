@@ -1,6 +1,6 @@
 <!-- reachys contact form. Submissions are saved by the "reachys Enquiries" plugin (WP admin → Enquiries). -->
-<form id="rx-enquiry" class="rx-form" action="/wp-admin/admin-post.php" method="post" aria-label="Project enquiry">
-<input type="hidden" name="action" value="reachys_enquiry">
+<form id="rx-enquiry" class="rx-form" method="post" aria-label="Project enquiry">
+<input type="hidden" name="rx_action" value="reachys_enquiry">
 <div class="rx-hp" aria-hidden="true"><label for="rx-website">Website</label><input id="rx-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 <div class="rx-two">
 <div><label for="rx-name">Name</label><input id="rx-name" name="name" type="text" placeholder="Your name" required></div>
@@ -38,8 +38,12 @@
     btn.textContent = 'Sending…';
     var data = new FormData(form);
     data.append('ajax', '1');
-    fetch(form.action, { method: 'POST', body: data, credentials: 'same-origin' })
-      .then(function (r) { return r.json(); })
+    fetch(location.href.split('#')[0], { method: 'POST', body: data, credentials: 'same-origin' })
+      .then(function (r) { return r.text(); })
+      .then(function (text) {
+        try { return JSON.parse(text); }
+        catch (e) { throw new Error('We couldn't send your message right now. Please email us instead.'); }
+      })
       .then(function (res) {
         if (res && res.success) { done(); return; }
         throw new Error(res && res.data && res.data.message);

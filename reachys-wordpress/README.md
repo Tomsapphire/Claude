@@ -87,4 +87,4 @@ Where messages go:
 
 Spam protection: the form has a hidden trap field and allows at most 5 messages per visitor every 10 minutes.
 
-If WordPress is installed in a subfolder (e.g. `example.com/wp/`), change `action="/wp-admin/admin-post.php"` in the form code to `action="/wp/wp-admin/admin-post.php"`.
+The form sends to the page it's on, so it doesn't depend on `/wp-admin` being reachable. It works with login-hiding or security plugins and with WordPress installed in a subfolder.

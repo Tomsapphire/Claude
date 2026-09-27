@@ -2,7 +2,7 @@
 /**
  * Plugin Name: reachys Enquiries
  * Description: Receives the reachys landing page contact form, stores each submission under "Enquiries" in the admin and emails a notification.
- * Version:     1.0.0
+ * Version:     1.1.0
  * Author:      reachys
  * License:     GPL-2.0-or-later
  * Requires at least: 6.0
@@ -128,6 +128,21 @@ function reachys_enq_handle() {
 }
 add_action( 'admin_post_nopriv_' . REACHYS_ENQ_ACTION, 'reachys_enq_handle' );
 add_action( 'admin_post_' . REACHYS_ENQ_ACTION, 'reachys_enq_handle' );
+
+/**
+ * The form posts to the page it is on (no /wp-admin URL, so it works with
+ * login-hiding/security plugins and sub-folder installs). Catch it early.
+ */
+function reachys_enq_maybe_handle() {
+	if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+		return;
+	}
+	if ( empty( $_POST['rx_action'] ) || REACHYS_ENQ_ACTION !== $_POST['rx_action'] ) {
+		return;
+	}
+	reachys_enq_handle();
+}
+add_action( 'init', 'reachys_enq_maybe_handle', 20 );
 
 /**
  * JSON for the page's script; a redirect back to the page when JavaScript is off.
