@@ -199,8 +199,8 @@ function confetti(winner) {
   let bursts = 0;
   const timer = setInterval(() => {
     for (const x of [-2.5, 0, 2.5]) {
-      const color = [winner.color, COLORS.gold, '#ffffff'][Math.floor(Math.random() * 3)];
-      particles.emit({ position: new THREE.Vector3(x, 6, -1), count: 30, color, speed: 3, spread: 1, up: 1, size: 0.28, life: 2.6, gravity: 1.2, drag: 1.2, colorJitter: 0.3 });
+      const color = Math.random() < 0.5 ? winner.color : COLORS.gold;
+      particles.emit({ position: new THREE.Vector3(x, 6, -1), count: 22, color, speed: 3, spread: 1, up: 1, size: 0.2, life: 2.6, gravity: 1.2, drag: 1.2, colorJitter: 0.3 });
     }
     if (++bursts >= 8) clearInterval(timer);
   }, 300);
