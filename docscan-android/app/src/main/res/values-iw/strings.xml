@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="cd_navigate_up">חזרה</string>
+
+    <!-- Home -->
+    <string name="home_title">מסמכים</string>
+    <string name="home_search_placeholder">חיפוש מסמכים</string>
+    <string name="home_search_clear">ניקוי החיפוש</string>
+    <string name="home_scan">סריקה</string>
+    <string name="home_scan_description">סריקת מסמך חדש</string>
+    <string name="home_sort">מיון מסמכים</string>
+    <string name="home_show_grid">תצוגת רשת</string>
+    <string name="home_show_list">תצוגת רשימה</string>
+    <string name="home_empty_title">אין עדיין מסמכים</string>
+    <string name="home_empty_body">אפשר לסרוק קבלות, חוזים ופתקים. הכול נשמר במכשיר הזה בלבד.</string>
+    <string name="home_no_results_title">לא נמצאו התאמות</string>
+    <string name="home_no_results_body">אין מסמכים שמתאימים ל„%1$s”. כדאי לנסות מילה אחרת.</string>
+    <string name="home_document_meta">%1$s · %2$s</string>
+    <plurals name="home_page_count">
+        <item quantity="one">עמוד אחד</item>
+        <item quantity="two">שני עמודים</item>
+        <item quantity="other">%d עמודים</item>
+    </plurals>
+
+    <!-- Sort sheet -->
+    <string name="sort_title">מיון לפי</string>
+    <string name="sort_updated_newest">שינוי אחרון</string>
+    <string name="sort_created_newest">החדשים ביותר</string>
+    <string name="sort_created_oldest">הישנים ביותר</string>
+    <string name="sort_title_a_to_z">שם (א–ת)</string>
+    <string name="sort_title_z_to_a">שם (ת–א)</string>
+
+    <!-- Scanner -->
+    <string name="scanner_title">סריקה</string>
+    <string name="scanner_coming_soon">המצלמה תתווסף באבן הדרך הבאה.</string>
+</resources>

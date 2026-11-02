@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">DocScan</string>
+
+    <!-- Common -->
+    <string name="cd_navigate_up">Back</string>
+
+    <!-- Home -->
+    <string name="home_title">Documents</string>
+    <string name="home_search_placeholder">Search documents</string>
+    <string name="home_search_clear">Clear search</string>
+    <string name="home_scan">Scan</string>
+    <string name="home_scan_description">Scan a new document</string>
+    <string name="home_sort">Sort documents</string>
+    <string name="home_show_grid">Show as grid</string>
+    <string name="home_show_list">Show as list</string>
+    <string name="home_empty_title">No documents yet</string>
+    <string name="home_empty_body">Scan receipts, contracts and notes. Everything stays on this device.</string>
+    <string name="home_no_results_title">No matches</string>
+    <string name="home_no_results_body">Nothing matches “%1$s”. Try a different word.</string>
+    <!-- Page count and date under a document's name, e.g. "3 pages · Oct 12". -->
+    <string name="home_document_meta">%1$s · %2$s</string>
+    <plurals name="home_page_count">
+        <item quantity="one">%d page</item>
+        <item quantity="other">%d pages</item>
+    </plurals>
+
+    <!-- Sort sheet -->
+    <string name="sort_title">Sort by</string>
+    <string name="sort_updated_newest">Last modified</string>
+    <string name="sort_created_newest">Newest first</string>
+    <string name="sort_created_oldest">Oldest first</string>
+    <string name="sort_title_a_to_z">Name (A–Z)</string>
+    <string name="sort_title_z_to_a">Name (Z–A)</string>
+
+    <!-- Scanner -->
+    <string name="scanner_title">Scan</string>
+    <string name="scanner_coming_soon">The camera arrives in the next milestone.</string>
+</resources>
