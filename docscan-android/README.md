@@ -17,11 +17,17 @@ Jetpack Compose and Material 3. Everything runs on the device: the app does not 
 | 7 | PDF/JPG/PNG export, sharing, printing, settings, biometric lock | Planned |
 | 8 | Polish, accessibility, tests, documentation | Planned |
 
+Project documents: [the original brief](docs/PROJECT_BRIEF.md) and
+[handoff notes](docs/HANDOFF.md) (decisions, status, next steps).
+
 ## Requirements
 
 - JDK 17 or newer
 - Android SDK with platform 37 (Android 17); Android Studio installs it on first sync
 - Devices: Android 8.0 (API 26) and newer
+
+On a fresh Linux machine or cloud container, `bash scripts/cloud-setup.sh` installs the SDK
+and configures Gradle.
 
 ## Build and test
 
