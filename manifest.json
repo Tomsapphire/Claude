@@ -1,0 +1,17 @@
+{
+  "name": "TEAME",
+  "short_name": "TEAME",
+  "description": "מגרשים, קבוצות ועונות לספורט שכונתי",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "/Claude/",
+  "scope": "/Claude/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14213a",
+  "theme_color": "#14213a",
+  "icons": [
+    { "src": "/Claude/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/Claude/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
